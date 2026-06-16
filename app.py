@@ -126,24 +126,26 @@ engine = create_engine(
     f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 )
 
-print("Reading CSV...")
+if "db_initialized" not in st.session_state:
+    print("Reading CSV...")
 
-df = pd.read_csv(CSV_FILE)
+    df = pd.read_csv(CSV_FILE)
 
-print(f"Rows found: {len(df)}")
+    print(f"Rows found: {len(df)}")
 
-print("Creating table and inserting data...")
+    print("Creating table and inserting data...")
 
-df.to_sql(
-    name=TABLE_NAME,
-    con=engine,
-    if_exists="replace",   # Drops and recreates table
-    index=False,
-    chunksize=10000
-)
+    df.to_sql(
+        name=TABLE_NAME,
+        con=engine,
+        if_exists="replace",   # Drops and recreates table
+        index=False,
+        chunksize=10000
+    )
 
-print("Done!")
-
+    print("Data Insertion Successful !")
+    st.session_state.db_initialized = True
+    
 # -------------------------------------------------------------------------
 # 2. SIDEBAR NAVIGATION LINKS
 # -------------------------------------------------------------------------
