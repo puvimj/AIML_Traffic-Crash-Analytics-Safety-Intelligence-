@@ -1,0 +1,6 @@
+[theme]
+# 1. This turns your dark black dataframe row blocks into pure, solid white!
+secondaryBackgroundColor = "#FFFFFF"
+
+# 2. Forces text values inside the cells to turn dark gray/black so they are highly readable
+textColor = "#1E293B"

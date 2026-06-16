@@ -1,0 +1,139 @@
+/* ==========================================================================
+   TRAFFIC INTELLIGENCE & SAFETY ANALYTICS ENGINE CORE STYLESHEET
+   ========================================================================== */
+
+/* 1. Global Application Background Configuration */
+.stApp {
+    background-image: linear-gradient(rgba(0, 255, 255, 0.88), rgba(144, 149, 159, 0.92)), 
+                       url("traffic_bg1.jpg") !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #E0E6ED !important;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* 2. Sidebar Navigation Panel Styling */
+[data-testid="stSidebar"] { 
+    background-color: white !important;
+    border-right: 1px solid rgba(0, 180, 216, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(77, 184, 107, 0.3);
+}
+
+/* 3. Typography & Heading Accents */
+h1, h2, h3 {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    text-shadow: 0 0 15px rgba(0, 180, 216, 0.4);
+}
+
+/* 4. Layout Container  */
+div[data-testid="stColumn"] {
+    background-color: rgba(22, 28, 41, 0.65) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 24px !important;
+    box-shadow: 0 8px 32px 0 rgba(77, 184, 107, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.2s ease, border 0.2s ease;
+}
+
+div[data-testid="stColumn"]:hover {
+    transform: translateY(-2px);
+    border: 1px solid rgba(0, 180, 216, 0.3);
+}
+
+/* 5. Interactive Navigation Elements (Tabs) */
+button[data-baseweb="tab"] {
+    color: #A0AEC0 !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    transition: color 0.2s ease;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: #00B4D8 !important;
+    border-bottom-color: #00B4D8 !important;
+}
+
+/* 6. Context Metadata (Insights & Captions) */
+small, .stMarkdown caption, p {
+    color: #CBD5E0 !important;
+    line-height: 1.6;
+}
+
+strong {
+    color: #11aa2d !important; /* Highlights core business insights */
+}
+
+/* 7. Changes the background color of the closed selectbox input field */
+[data-testid="stSelectbox"] div[data-baseweb="select"] > div:first-child {
+    background-color: white !important; /* Deep navy-charcoal background */
+    border: 1px solid rgba(71, 160, 178, 0.3) !important;  /* Elegant neon-blue boundary line */
+    border-radius: 8px !important;
+    color: black;
+}
+
+div[role="option"], li[role="option"] {
+    background-color: white !important;
+    color: rgb(23, 23, 24) !important; /* Dark charcoal text for contrast */
+}
+
+/* ==========================================================================
+   12. RECONFIGURED SIDEBAR INTEL PORTAL NAVIGATION
+   ========================================================================== */
+
+/* 1. Sleek, clean telemetry-style section headers */
+[data-testid="stSidebar"] h3, 
+[data-testid="stSidebar"] div[data-testid="stWidgetLabel"] p {
+    color: #00B4D8 !important; /* Vivid Cyan color contrast */
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.16em !important; /* Wide technical spacing layout */
+    text-transform: uppercase !important;
+    margin-bottom: 24px !important;
+    margin-top: 10px !important;
+    text-shadow: 0 0 12px rgba(0, 180, 216, 0.25) !important;
+    border: none !important; /* Clears out awkward line styling */
+    padding: 0 !important;
+}
+
+/* 2. Seamless full-width navigation link capsules */
+[data-testid="stSidebar"] div[role="radiogroup"] label {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 12px 16px !important;
+    margin-bottom: 8px !important;
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 8px !important;
+    color: #94A3B8 !important; /* Soft slate font color */
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* 3. Smooth responsive hover layout state */
+[data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+    background-color: rgba(0, 180, 216, 0.06) !important;
+    border: 1px solid rgba(0, 180, 216, 0.25) !important;
+    color: #FFFFFF !important;
+}
+
+/* 4. Crisp active selection state */
+[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] {
+    background: rgba(41, 86, 176, 0.2) !important; /* Faint accent background tint */
+    border: 1px solid #00B4D8 !important;          /* Sharp Cyan border bounding box */
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+}
+
