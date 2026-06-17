@@ -4,7 +4,6 @@ from sqlalchemy import create_engine, text
 
 import base64
 import altair as alt
-import os
 
 # -------------------------------------------------------------------------
 # 1. PAGE AND CONFIGURATION SETUP
@@ -15,8 +14,8 @@ def get_base64_image(file_path):
     return base64.b64encode(data).decode()
 
 # Convert your saved clean local image
-encoded_bg = get_base64_image("traffic_bg1.jpg")
-sidebar_base64 = get_base64_image("traffic_bg.jpg")
+mainlayout_bg = get_base64_image("traffic_bg1.jpg")
+sidebar_bg = get_base64_image("traffic_bg.jpg")
 
 # Global UI layout styles - Fixed with doubled curly brackets
 st.markdown(f"""
@@ -24,7 +23,7 @@ st.markdown(f"""
         /* Force background layout injection */
         .stApp, [data-testid="stAppViewContainer"], .stAppDeployWithLayout {{
             background-image: linear-gradient(rgba(0, 255,255, 0.88), rgba(14, 17, 23, 0.92)), 
-                              url("data:image/jpeg;base64,{encoded_bg}") !important;
+                              url("data:image/jpeg;base64,{mainlayout_bg}") !important;
             background-size: cover !important;
             background-position: center !important;
             background-repeat: no-repeat !important;
@@ -33,11 +32,12 @@ st.markdown(f"""
         }}
     </style>
 """, unsafe_allow_html=True)
+
 st.markdown(f"""
     <style>
         [data-testid="stSidebar"] {{
             background-image: linear-gradient(rgba(41, 86, 176, 0.90), rgba(14, 17, 23, 0.94)), 
-                              url("data:image/jpeg;base64,{sidebar_base64}") !important;
+                              url("data:image/jpeg;base64,{sidebar_bg}") !important;
             background-size: cover !important;
             background-position: center !important;
         }}
@@ -65,48 +65,6 @@ st.set_page_config(
     layout="wide",
 )
 
-# # Database Credentials
-# DB_USER = "postgres"
-# DB_PASSWORD = "india*123"
-# DB_HOST = "localhost"
-# DB_PORT = "5432"
-# DB_NAME = "TrafficCrash"
-
-# # File and Table Configuration
-# CSV_FILE_PATH = "C:/GUVI Projects/AIML_Traffic Crash Analytics & Safety Intelligence/trafficCrash/Traffic_CrashesData.csv"
-# TABLE_NAME = "CrashTable1"
-
-# # Create SQLAlchemy Engine
-# @st.cache_resource
-# def get_db_engine():
-#     """Establishes a reusable, cached connection engine to PostgreSQL."""
-#     connection_uri = (
-#         f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-#     )
-#     return create_engine(connection_uri)
-
-# engine = get_db_engine()
-
-# # Read CSV file
-# print("Reading CSV ...")
-# df = pd.read_csv(CSV_FILE_PATH)
-
-# print("Inserting data ...")
-# # Insert into PostgreSQL
-# with engine.begin() as conn:  # automatically commits on success
-#     df.to_sql(
-#         name=TABLE_NAME,
-#         con=conn,
-#         if_exists="replace",
-#         index=False,
-#         method="multi",
-#         chunksize=1000
-#     )
-
-# print("Data inserted successfully!")
-
-import pandas as pd
-from sqlalchemy import create_engine
 
 # PostgreSQL connection details
 DB_USER = "postgres"
@@ -156,24 +114,23 @@ def execute_sql(query_string: str) -> pd.DataFrame:
         return pd.read_sql_query(text(query_string), conn)
     
 with st.sidebar:
-    st.title("Safety Assurance Portal")
+    st.title("Navigation")
     
     # Use a clean selectbox or radio group instead of raw text bullet points
-    nav_selection = st.radio(
+    nav_selection = st.sidebar.radio(
         "Select Interface View:",
         ["📊 Dashboard", "📈 Crash Analytics"],
         label_visibility="collapsed"
     )
 
-    st.markdown("<br><br><br>", unsafe_allow_html=True) 
-    #st.success("Connected to PostgreSQL Master Node", icon="💾")
-
 
 # -------------------------------------------------------------------------
 # 3. DASHBOARD
 # -------------------------------------------------------------------------
+st.title('Traffic Crash Analytics and Safety Intelligence')
+
 if nav_selection == "📊 Dashboard":
-    st.title('Traffic Crash Analytics and Safety Intelligence')
+    
     st.markdown(
         "Real-time transactional insights processed directly from the master incident dataset."
     )
@@ -366,15 +323,18 @@ if nav_selection == "📊 Dashboard":
                 st.altair_chart(lollipop_chart, width="stretch")
 
 
-            top_street = df_locations["Weather"].iloc[0]
+            top_weather = df_locations["Weather"].iloc[0]
+
             st.info(
-                f"**Business Insight:** **{top_street}** is flagged as the highest-risk corridor. "
-                "Civic engineering teams should prioritize evaluating signal timings and lane layouts at this location."
+                f"**Business Insight:** Analysis of crash distribution by weather condition reveals the environmental factors "
+                f" contributing to road accidents. While most crashes occur during **{top_weather}** "
+                f" weather due to higher traffic exposure, adverse weather conditions such as rain"
+                f" and fog increase crash risk per trip, highlighting the need for weather-responsive traffic management strategies."
             )
         else:
             st.warning("No geographical location data rows were returned.")
     except Exception as e:
-        st.error(f"Spatial Location Query Failed: {e}")
+        st.error(f"Spatial Distribution Query Failed: {e}")
 
 # 4. CRASH ANALYTICS
 else:
