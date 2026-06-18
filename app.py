@@ -704,7 +704,9 @@ else:
                                                 "YoY Growth Rate (%)": st.column_config.NumberColumn(format="%.2f%%"),},
                                                 width="stretch",hide_index=True,)
                 st.info(f"**Business Insight:** The structural macro trend shows an active annual growth rate fluctuation of"
-                        f" **{df1['YoY Growth Rate (%)'].iloc[0]}%** in overall incident registration records.")
+                        f" **{df1['YoY Growth Rate (%)'].iloc[0]}%** in overall incident registration records."
+                        f" Following a sharp increase in 2021, annual crash volumes stabilized with only minor fluctuations,"
+                        f" suggesting that current safety measures have limited crash growth but have not significantly reduced overall incidents")
             except Exception as e:
                 st.error(f"Execution Error: {e}")
 
